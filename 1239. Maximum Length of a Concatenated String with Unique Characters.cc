@@ -1,9 +1,11 @@
 class Solution {
 public:
-    bool unique(string s1, string s2){
+    bool unique(string s1){
         for(int i = 0; i<s1.size(); ++i){
-            for(int j = 0; j<s2.size(); ++j){
-                if(s1[i] == s2[j]) return false;
+            for(int j = i+1; j<s1.size(); ++j){
+                if(s1[i] == s1[j]){
+                    return false;
+                }
             }
         }
         return true;
@@ -14,7 +16,7 @@ public:
             return;
         }
 
-        if (unique(pal, arr[indice])){
+        if (unique(pal+arr[indice])){
             string pal2 = pal+arr[indice];
             if(pal2.size() > maximum){
                 maximum = pal2.size();
@@ -39,7 +41,9 @@ public:
 
     int maxLength(vector<string>& arr) {
         int maximum = 0;
-        maxLength2(arr, 0, "", maximum);
+        for(int i = 0; i<arr.size(); ++i){
+            maxLength2(arr, i, "", maximum);
+        }
         return maximum;
     }
 };
